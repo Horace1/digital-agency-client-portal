@@ -4,14 +4,14 @@ import { Head } from '@inertiajs/vue3';
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Client Portal" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200"
             >
-                Dashboard
+                Client Portal
             </h2>
         </template>
 
@@ -20,8 +20,70 @@ import { Head } from '@inertiajs/vue3';
                 <div
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800"
                 >
-                    <div class="p-6 text-gray-900 dark:text-gray-100">
-                        You're logged in!
+                    <div class="p-6">
+                        <h3
+                            class="text-2xl font-semibold text-gray-900 dark:text-gray-100"
+                        >
+                            Welcome back!
+                        </h3>
+
+                        <p class="mt-2 text-gray-600 dark:text-gray-400">
+                            View your projects, updates and support tickets.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    <div
+                        class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg dark:bg-gray-800"
+                    >
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                            Projects
+                        </p>
+                        <p
+                            class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100"
+                        >
+                            0
+                        </p>
+                    </div>
+
+                    <div
+                        class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg dark:bg-gray-800"
+                    >
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                            Support Tickets
+                        </p>
+                        <p
+                            class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100"
+                        >
+                            0
+                        </p>
+                    </div>
+
+                    <div
+                        class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg dark:bg-gray-800"
+                    >
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                            Project Updates
+                        </p>
+                        <p
+                            class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100"
+                        >
+                            0
+                        </p>
+                    </div>
+
+                    <div
+                        class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg dark:bg-gray-800"
+                    >
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                            Files
+                        </p>
+                        <p
+                            class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100"
+                        >
+                            0
+                        </p>
                     </div>
                 </div>
             </div>
