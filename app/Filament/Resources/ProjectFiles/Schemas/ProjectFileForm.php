@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ProjectFiles\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -18,8 +19,13 @@ class ProjectFileForm
                     ->required(),
                 TextInput::make('name')
                     ->required(),
-                TextInput::make('path')
-                    ->required(),
+                FileUpload::make('path')
+                    ->label('File')
+                    ->directory('project-files')
+                    ->disk('public')
+                    ->required()
+                    ->downloadable()
+                    ->openable(),
                 TextInput::make('disk')
                     ->required()
                     ->default('public'),
