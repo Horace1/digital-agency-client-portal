@@ -1,14 +1,11 @@
 <?php
 
+use App\Http\Controllers\ClientDashboardController;
 use App\Http\Controllers\ClientNotificationController;
 use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\ClientSupportTicketController;
 use App\Http\Controllers\ProfileController;
-use App\Models\ProjectFile;
-use App\Models\ProjectUpdate;
-use App\Models\SupportTicket;
 use Illuminate\Foundation\Application;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -21,22 +18,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function (Request $request) {
-    $client = $request->user()->client;
-
-    return Inertia::render('Dashboard', [
-        'projectsCount' => $client?->projects()->count() ?? 0,
-        'supportTicketsCount' => $client
-            ? SupportTicket::whereHas('project', fn ($query) => $query->where('client_id', $client->id))->count()
-            : 0,
-        'projectUpdatesCount' => $client
-            ? ProjectUpdate::whereHas('project', fn ($query) => $query->where('client_id', $client->id))->count()
-            : 0,
-        'filesCount' => $client
-            ? ProjectFile::whereHas('project', fn ($query) => $query->where('client_id', $client->id))->count()
-            : 0,
-    ]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', ClientDashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
