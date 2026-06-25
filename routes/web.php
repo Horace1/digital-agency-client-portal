@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientProjectController;
 use App\Http\Controllers\ProfileController;
 use App\Models\ProjectFile;
 use App\Models\ProjectUpdate;
@@ -39,6 +40,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/projects', [ClientProjectController::class, 'index'])->name('client.projects.index');
+    Route::get('/projects/{project}', [ClientProjectController::class, 'show'])->name('client.projects.show');
 });
 
 require __DIR__.'/auth.php';
