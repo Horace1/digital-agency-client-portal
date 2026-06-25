@@ -29,9 +29,25 @@ defineProps({
                 >
                     <div
                         v-if="notifications.data.length === 0"
-                        class="p-6 text-sm text-gray-600 dark:text-gray-400"
+                        class="p-8 text-center sm:p-10"
                     >
-                        You do not have any notifications yet.
+                        <div
+                            class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-sm font-semibold text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-200"
+                        >
+                            IN
+                        </div>
+                        <h3
+                            class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100"
+                        >
+                            No notifications yet
+                        </h3>
+                        <p
+                            class="mx-auto mt-2 max-w-xl text-sm leading-6 text-gray-600 dark:text-gray-400"
+                        >
+                            Project updates, new files, and support ticket
+                            replies will appear here as your agency team shares
+                            them.
+                        </p>
                     </div>
 
                     <div v-else class="divide-y divide-gray-200 dark:divide-gray-700">

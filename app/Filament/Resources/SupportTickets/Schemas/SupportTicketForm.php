@@ -2,11 +2,12 @@
 
 namespace App\Filament\Resources\SupportTickets\Schemas;
 
+use App\Models\SupportTicket;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class SupportTicketForm
@@ -23,13 +24,8 @@ class SupportTicketForm
                 Textarea::make('description')
                     ->columnSpanFull(),
                 Select::make('status')
-                    ->options([
-                        'open' => 'Open',
-                        'in_progress' => 'In Progress',
-                        'waiting_on_client' => 'Waiting on Client',
-                        'resolved' => 'Resolved',
-                    ])
-                    ->default('open')
+                    ->options(SupportTicket::statuses())
+                    ->default(SupportTicket::STATUS_OPEN)
                     ->required(),
                 Select::make('priority')
                     ->options([

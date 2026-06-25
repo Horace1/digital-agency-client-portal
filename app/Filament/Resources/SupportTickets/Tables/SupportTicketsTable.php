@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SupportTickets\Tables;
 
+use App\Models\SupportTicket;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -20,6 +21,7 @@ class SupportTicketsTable
                     ->searchable(),
                 TextColumn::make('status')
                     ->badge()
+                    ->formatStateUsing(fn (string $state): string => SupportTicket::statusLabel($state))
                     ->searchable(),
                 TextColumn::make('priority')
                     ->badge()

@@ -19,7 +19,7 @@ class SupportTicketFactory extends Factory
      */
     public function definition(): array
     {
-        $status = fake()->randomElement(['open', 'in_progress', 'waiting_on_client', 'resolved']);
+        $status = fake()->randomElement(array_keys(SupportTicket::statuses()));
 
         return [
             'project_id' => Project::factory(),
@@ -29,7 +29,9 @@ class SupportTicketFactory extends Factory
             'status' => $status,
             'priority' => fake()->randomElement(['low', 'medium', 'high', 'urgent']),
             'due_date' => fake()->optional(0.6)->dateTimeBetween('now', '+1 month'),
-            'completed_at' => $status === 'resolved' ? fake()->dateTimeBetween('-1 month', 'now') : null,
+            'completed_at' => in_array($status, [SupportTicket::STATUS_RESOLVED, SupportTicket::STATUS_CLOSED], true)
+                ? fake()->dateTimeBetween('-1 month', 'now')
+                : null,
         ];
     }
 }

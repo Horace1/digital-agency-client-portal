@@ -8,21 +8,6 @@ defineProps({
         required: true,
     },
 });
-
-const statusBadgeClasses = (status) => {
-    return (
-        {
-            resolved:
-                'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200',
-            in_progress:
-                'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200',
-            waiting_on_client:
-                'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200',
-            open: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-200',
-        }[status] ||
-        'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
-    );
-};
 </script>
 
 <template>
@@ -54,10 +39,31 @@ const statusBadgeClasses = (status) => {
                 >
                     <div
                         v-if="tickets.data.length === 0"
-                        class="p-6 text-sm text-gray-600 dark:text-gray-400"
+                        class="p-8 text-center sm:p-10"
                     >
-                        No support tickets have been opened for your account
-                        yet.
+                        <div
+                            class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-sm font-semibold text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-200"
+                        >
+                            ST
+                        </div>
+                        <h3
+                            class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100"
+                        >
+                            No support tickets yet
+                        </h3>
+                        <p
+                            class="mx-auto mt-2 max-w-xl text-sm leading-6 text-gray-600 dark:text-gray-400"
+                        >
+                            When you need help with an active project, open a
+                            ticket and the conversation will stay organized
+                            here.
+                        </p>
+                        <Link
+                            :href="route('client.support-tickets.create')"
+                            class="mt-6 inline-flex items-center rounded-md bg-gray-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-white"
+                        >
+                            Create Ticket
+                        </Link>
                     </div>
 
                     <div v-else class="overflow-x-auto">
@@ -113,9 +119,7 @@ const statusBadgeClasses = (status) => {
                                     <td class="px-6 py-4">
                                         <span
                                             :class="[
-                                                statusBadgeClasses(
-                                                    ticket.status,
-                                                ),
+                                                ticket.status_badge_classes,
                                                 'rounded-full px-3 py-1 text-xs font-medium',
                                             ]"
                                         >

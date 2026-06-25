@@ -40,16 +40,24 @@ const statusBadgeClasses = (status) => {
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div
                     v-if="projects.data.length === 0"
-                    class="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg dark:bg-gray-800"
+                    class="overflow-hidden bg-white p-8 text-center shadow-sm sm:rounded-lg sm:p-10 dark:bg-gray-800"
                 >
-                    <h3
-                        class="text-lg font-semibold text-gray-900 dark:text-gray-100"
+                    <div
+                        class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-indigo-50 text-sm font-semibold text-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-200"
                     >
-                        No projects yet
+                        PR
+                    </div>
+                    <h3
+                        class="mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100"
+                    >
+                        No assigned projects yet
                     </h3>
-                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    <p
+                        class="mx-auto mt-2 max-w-xl text-sm leading-6 text-gray-600 dark:text-gray-400"
+                    >
                         Projects assigned to your client account will appear
-                        here.
+                        here with their current status, progress, files, and
+                        updates.
                     </p>
                 </div>
 

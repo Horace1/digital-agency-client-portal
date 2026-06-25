@@ -15,21 +15,6 @@ const form = useForm({
     body: '',
 });
 
-const statusBadgeClasses = (status) => {
-    return (
-        {
-            resolved:
-                'bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-200',
-            in_progress:
-                'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200',
-            waiting_on_client:
-                'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200',
-            open: 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-200',
-        }[status] ||
-        'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
-    );
-};
-
 const submit = () => {
     form.post(route('client.support-tickets.comments.store', props.ticket.id), {
         preserveScroll: true,
@@ -67,7 +52,7 @@ const submit = () => {
                 </div>
                 <span
                     :class="[
-                        statusBadgeClasses(ticket.status),
+                        ticket.status_badge_classes,
                         'w-fit rounded-full px-3 py-1 text-xs font-medium',
                     ]"
                 >
@@ -107,9 +92,20 @@ const submit = () => {
 
                         <div
                             v-if="ticket.comments.length === 0"
-                            class="mt-4 rounded-md border border-dashed border-gray-300 p-4 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400"
+                            class="mt-4 rounded-md border border-dashed border-gray-300 bg-gray-50/60 p-5 dark:border-gray-700 dark:bg-gray-900/30"
                         >
-                            No replies have been added yet.
+                            <h4
+                                class="font-semibold text-gray-900 dark:text-gray-100"
+                            >
+                                No replies yet
+                            </h4>
+                            <p
+                                class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400"
+                            >
+                                Replies from your agency team will appear here.
+                                Add a reply below if you need to share more
+                                context or ask for help.
+                            </p>
                         </div>
 
                         <div v-else class="mt-4 space-y-4">
@@ -188,9 +184,16 @@ const submit = () => {
                                     Status
                                 </dt>
                                 <dd
-                                    class="mt-1 text-gray-900 dark:text-gray-100"
+                                    class="mt-1"
                                 >
-                                    {{ ticket.status_label }}
+                                    <span
+                                        :class="[
+                                            ticket.status_badge_classes,
+                                            'inline-flex rounded-full px-3 py-1 text-xs font-medium',
+                                        ]"
+                                    >
+                                        {{ ticket.status_label }}
+                                    </span>
                                 </dd>
                             </div>
                             <div>

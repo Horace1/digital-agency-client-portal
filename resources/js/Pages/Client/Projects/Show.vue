@@ -126,9 +126,19 @@ const updateBadgeClasses = (status) => {
 
                         <div
                             v-if="project.updates.length === 0"
-                            class="mt-4 rounded-md border border-dashed border-gray-300 p-4 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400"
+                            class="mt-4 rounded-md border border-dashed border-gray-300 bg-gray-50/60 p-5 dark:border-gray-700 dark:bg-gray-900/30"
                         >
-                            No project updates have been posted yet.
+                            <h4
+                                class="font-semibold text-gray-900 dark:text-gray-100"
+                            >
+                                No updates posted yet
+                            </h4>
+                            <p
+                                class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400"
+                            >
+                                Published milestones and progress notes from
+                                your agency team will appear here.
+                            </p>
                         </div>
 
                         <div v-else class="mt-4 space-y-4">
@@ -184,9 +194,19 @@ const updateBadgeClasses = (status) => {
 
                         <div
                             v-if="project.files.length === 0"
-                            class="mt-4 rounded-md border border-dashed border-gray-300 p-4 text-sm text-gray-600 dark:border-gray-700 dark:text-gray-400"
+                            class="mt-4 rounded-md border border-dashed border-gray-300 bg-gray-50/60 p-5 dark:border-gray-700 dark:bg-gray-900/30"
                         >
-                            No files have been uploaded for this project yet.
+                            <h4
+                                class="font-semibold text-gray-900 dark:text-gray-100"
+                            >
+                                No files uploaded yet
+                            </h4>
+                            <p
+                                class="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-400"
+                            >
+                                Shared documents, creative assets, and project
+                                files will be available here once uploaded.
+                            </p>
                         </div>
 
                         <div v-else class="mt-4 space-y-4">
