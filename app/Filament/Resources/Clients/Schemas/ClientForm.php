@@ -24,7 +24,14 @@ class ClientForm
                 TextInput::make('phone')
                     ->tel(),
                 TextInput::make('website')
-                    ->url(),
+                    ->type('text')
+                    ->rule('url')
+                    ->mutateStateForValidationUsing(
+                        static fn (?string $state): ?string => self::normalizeWebsite($state),
+                    )
+                    ->dehydrateStateUsing(
+                        static fn (?string $state): ?string => self::normalizeWebsite($state),
+                    ),
                 Select::make('status')
                     ->options([
                         'active' => 'Active',
@@ -36,5 +43,20 @@ class ClientForm
                 Textarea::make('notes')
                     ->columnSpanFull(),
             ]);
+    }
+
+    private static function normalizeWebsite(?string $website): ?string
+    {
+        $website = trim((string) $website);
+
+        if ($website === '') {
+            return null;
+        }
+
+        if (preg_match('/^[a-z][a-z0-9+.-]*:\/\//i', $website) === 1) {
+            return $website;
+        }
+
+        return "https://{$website}";
     }
 }

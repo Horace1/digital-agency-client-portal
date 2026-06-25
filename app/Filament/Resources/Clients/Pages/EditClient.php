@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Clients\Pages;
 
 use App\Filament\Resources\Clients\ClientResource;
+use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
@@ -13,7 +14,15 @@ class EditClient extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('managePortalAccess')
+                ->label('Manage Portal Access')
+                ->url(fn (): string => static::getResource()::getUrl('portal-access', ['record' => $this->record])),
             DeleteAction::make(),
         ];
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return static::getResource()::getUrl('index');
     }
 }
