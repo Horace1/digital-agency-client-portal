@@ -1,6 +1,25 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+
+defineProps({
+    projectsCount: {
+        type: Number,
+        default: 0,
+    },
+    supportTicketsCount: {
+        type: Number,
+        default: 0,
+    },
+    projectUpdatesCount: {
+        type: Number,
+        default: 0,
+    },
+    filesCount: {
+        type: Number,
+        default: 0,
+    },
+});
 </script>
 
 <template>
@@ -43,7 +62,7 @@ import { Head } from '@inertiajs/vue3';
                         <p
                             class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100"
                         >
-                            0
+                            {{ projectsCount }}
                         </p>
                     </div>
 
@@ -56,7 +75,7 @@ import { Head } from '@inertiajs/vue3';
                         <p
                             class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100"
                         >
-                            0
+                            {{ supportTicketsCount }}
                         </p>
                     </div>
 
@@ -69,7 +88,7 @@ import { Head } from '@inertiajs/vue3';
                         <p
                             class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100"
                         >
-                            0
+                            {{ projectUpdatesCount }}
                         </p>
                     </div>
 
@@ -82,7 +101,7 @@ import { Head } from '@inertiajs/vue3';
                         <p
                             class="mt-2 text-3xl font-semibold text-gray-900 dark:text-gray-100"
                         >
-                            0
+                            {{ filesCount }}
                         </p>
                     </div>
                 </div>
