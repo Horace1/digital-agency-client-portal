@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientBillingController;
 use App\Http\Controllers\ClientDashboardController;
 use App\Http\Controllers\ClientNotificationController;
 use App\Http\Controllers\ClientProjectController;
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/billing', [ClientBillingController::class, 'index'])->name('client.billing.index');
     Route::get('/notifications', [ClientNotificationController::class, 'index'])->name('client.notifications.index');
     Route::patch('/notifications/{notification}/read', [ClientNotificationController::class, 'markAsRead'])->name('client.notifications.read');
     Route::get('/projects', [ClientProjectController::class, 'index'])->name('client.projects.index');
