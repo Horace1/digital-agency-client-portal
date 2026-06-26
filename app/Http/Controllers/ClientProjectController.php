@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\ProjectFile;
 use App\Models\ProjectUpdate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -21,11 +22,12 @@ class ClientProjectController extends Controller
 
         $projects = $client
             ? $client->projects()
+                ->withAggregate(['updates' => fn ($query) => $query->where('status', 'published')], 'created_at', 'max')
                 ->latest()
-                ->paginate(9)
+                ->paginate(10)
                 ->through(fn (Project $project): array => $this->serializeProject($project))
                 ->withQueryString()
-            : Project::query()->whereRaw('1 = 0')->paginate(9);
+            : Project::query()->whereRaw('1 = 0')->paginate(10);
 
         return Inertia::render('Client/Projects/Index', [
             'projects' => $projects,
@@ -76,10 +78,16 @@ class ClientProjectController extends Controller
         return [
             'id' => $project->id,
             'title' => $project->title,
+            'description' => $project->description,
             'status' => $project->status,
             'status_label' => $project->status_label,
             'status_badge_classes' => $project->status_badge_classes,
             'progress_percentage' => $project->progress_percentage,
+            'due_date' => $project->due_date?->format('M j, Y'),
+            'is_overdue' => $project->due_date?->isPast() && $project->status !== 'completed',
+            'last_update' => $project->updates_max_created_at
+                ? Carbon::parse($project->updates_max_created_at)->format('M j, Y')
+                : null,
             'show_url' => route('client.projects.show', $project),
         ];
     }
